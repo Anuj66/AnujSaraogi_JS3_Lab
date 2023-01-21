@@ -12,7 +12,7 @@ prompt.style.display = "none";
 let loader = document.getElementById("loader");
 loader.style.display = "none";
 
-function sanitizeCityName(str) {
+function sanitize(str) {
   var splitStr = str.toLowerCase().split(" ");
   for (var i = 0; i < splitStr.length; i++) {
     splitStr[i] =
@@ -80,14 +80,10 @@ search.addEventListener("keyup", async (event) => {
           );
           const weatherData = await weatherResponse.json();
 
-          const weatherPhrase = sanitizeCityName(
-            weatherData.current.symbolPhrase
-          );
+          const weatherPhrase = sanitize(weatherData.current.symbolPhrase);
 
-          const cityName = sanitizeCityName(search.value);
-          const countryName = sanitizeCityName(
-            countryData.locations[0].country
-          );
+          const cityName = sanitize(search.value);
+          const countryName = sanitize(countryData.locations[0].country);
 
           city.innerHTML = cityName + ", " + countryName;
           const dateOptions = {
